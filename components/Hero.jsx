@@ -11,10 +11,10 @@ const Hero = () => {
   return (
     <div className="mx-6">
       <div className="flex max-xl:flex-col gap-8 max-w-7xl mx-auto my-10">
-        
+
         {/* MAIN HERO */}
-        <div className="relative flex-1 bg-green-200 rounded-3xl overflow-hidden">
-          
+        <div className="relative flex-1 bg-green-200 rounded-3xl overflow-hidden group cursor-pointer hover:scale-[1.02] hover:shadow-2xl transition-all duration-500 ease-out">
+
           {/* TEXT CONTENT */}
           <div className="relative z-10 p-5 sm:p-16 max-w-xl">
             <div className="inline-flex items-center gap-3 bg-green-300 text-green-700 pr-4 p-1 rounded-full text-xs sm:text-sm">
@@ -34,7 +34,7 @@ const Hero = () => {
               <p className="text-3xl">{currency}4.90</p>
             </div>
 
-            <button className="bg-slate-800 text-white text-sm py-3 px-8 mt-8 rounded-md hover:bg-slate-900 transition">
+            <button className="bg-slate-800 text-white text-sm py-3 px-8 mt-8 rounded-md hover:bg-slate-900 hover:scale-105 hover:shadow-lg transition-all duration-300 ease-out">
               LEARN MORE
             </button>
           </div>
@@ -56,28 +56,28 @@ const Hero = () => {
 
         {/* SIDE CARDS */}
         <div className="flex flex-col md:flex-row xl:flex-col gap-5 w-full xl:max-w-sm text-sm text-slate-600">
-          <div className="flex-1 flex items-center justify-between bg-orange-200 rounded-3xl p-6 px-8 group">
+          <div className="flex-1 flex items-center justify-between bg-orange-200 rounded-3xl p-6 px-8 group cursor-pointer hover:scale-105 hover:shadow-2xl transition-all duration-300 ease-out">
             <div>
               <p className="text-3xl font-medium bg-gradient-to-r from-slate-800 to-[#FFAD51] bg-clip-text text-transparent">
                 Best products
               </p>
-              <p className="flex items-center gap-1 mt-4">
-                View more <ArrowRightIcon size={18} />
+              <p className="flex items-center gap-1 mt-4 group-hover:gap-2 transition-all duration-300">
+                View more <ArrowRightIcon size={18} className="group-hover:translate-x-1 transition-transform duration-300" />
               </p>
             </div>
-            <Image className="w-32" src={assets.hero_product_img1} alt="" />
+            <Image className="w-32 group-hover:scale-110 transition-transform duration-300" src={assets.hero_product_img1} alt="" />
           </div>
 
-          <div className="flex-1 flex items-center justify-between bg-blue-200 rounded-3xl p-6 px-8 group">
+          <div className="flex-1 flex items-center justify-between bg-blue-200 rounded-3xl p-6 px-8 group cursor-pointer hover:scale-105 hover:shadow-2xl transition-all duration-300 ease-out">
             <div>
               <p className="text-3xl font-medium bg-gradient-to-r from-slate-800 to-[#78B2FF] bg-clip-text text-transparent">
                 20% discounts
               </p>
-              <p className="flex items-center gap-1 mt-4">
-                View more <ArrowRightIcon size={18} />
+              <p className="flex items-center gap-1 mt-4 group-hover:gap-2 transition-all duration-300">
+                View more <ArrowRightIcon size={18} className="group-hover:translate-x-1 transition-transform duration-300" />
               </p>
             </div>
-            <Image className="w-32" src={assets.hero_product_img2} alt="" />
+            <Image className="w-32 group-hover:scale-110 transition-transform duration-300" src={assets.hero_product_img2} alt="" />
           </div>
         </div>
       </div>
