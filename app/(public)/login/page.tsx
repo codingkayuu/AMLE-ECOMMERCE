@@ -3,16 +3,26 @@ import React, { useState } from 'react'
 import Link from 'next/link'
 import { MailIcon, LockIcon, EyeIcon, EyeOffIcon, ArrowRightIcon } from 'lucide-react'
 import Image from 'next/image'
+import { useAuth } from '@/context/AuthContext'
+import toast from 'react-hot-toast'
+import { useRouter } from 'next/navigation'
 
 export default function LoginPage() {
+    const { signIn } = useAuth()
+    const router = useRouter()
     const [showPassword, setShowPassword] = useState(false)
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
 
-    const handleSubmit = (e: React.FormEvent) => {
+    const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault()
-        // Handle login logic here
-        console.log('Login:', { email, password })
+        try {
+            await signIn(email, password)
+            toast.success('Logged in successfully!')
+            router.push('/')
+        } catch (error: any) {
+            toast.error(error.message || 'Failed to login')
+        }
     }
 
     return (

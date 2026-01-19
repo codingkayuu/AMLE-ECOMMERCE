@@ -4,8 +4,12 @@ import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { UserIcon, MailIcon, LockIcon, EyeIcon, EyeOffIcon, ArrowRightIcon, ArrowLeftIcon, ShoppingBagIcon, StoreIcon } from 'lucide-react'
 
+import { useAuth } from '@/context/AuthContext'
+import toast from 'react-hot-toast'
+
 export default function SignupPage() {
     const router = useRouter()
+    const { signUp } = useAuth()
     const [accountType, setAccountType] = useState<'buyer' | 'seller' | null>(null)
     const [showPassword, setShowPassword] = useState(false)
     const [formData, setFormData] = useState({
@@ -14,10 +18,24 @@ export default function SignupPage() {
         password: ''
     })
 
-    const handleSubmit = (e: React.FormEvent) => {
+    const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault()
-        // Handle signup logic here
-        console.log('Signup:', { ...formData, accountType })
+        if (!accountType) {
+            toast.error('Please select an account type (Buyer or Seller)')
+            return
+        }
+
+        try {
+            await signUp(formData.email, formData.password, {
+                full_name: formData.fullName,
+                role: accountType
+            })
+            toast.success('Account created! Please check your email to confirm.')
+            // Optional: Redirect to login or a "verify email" page after a delay
+            // setTimeout(() => router.push('/login'), 5000)
+        } catch (error: any) {
+            toast.error(error.message || 'An error occurred during sign up')
+        }
     }
 
     return (
@@ -57,8 +75,8 @@ export default function SignupPage() {
                         type="button"
                         onClick={() => setAccountType('buyer')}
                         className={`relative p-6 rounded-xl border-2 transition-all duration-300 ${accountType === 'buyer'
-                                ? 'border-green-500 bg-green-50 scale-105 shadow-lg'
-                                : 'border-slate-200 bg-white hover:border-green-300 hover:scale-105'
+                            ? 'border-green-500 bg-green-50 scale-105 shadow-lg'
+                            : 'border-slate-200 bg-white hover:border-green-300 hover:scale-105'
                             }`}
                     >
                         <div className="flex flex-col items-center space-y-3">
@@ -76,8 +94,8 @@ export default function SignupPage() {
                         type="button"
                         onClick={() => setAccountType('seller')}
                         className={`relative p-6 rounded-xl border-2 transition-all duration-300 ${accountType === 'seller'
-                                ? 'border-blue-500 bg-blue-50 scale-105 shadow-lg'
-                                : 'border-slate-200 bg-white hover:border-blue-300 hover:scale-105'
+                            ? 'border-blue-500 bg-blue-50 scale-105 shadow-lg'
+                            : 'border-slate-200 bg-white hover:border-blue-300 hover:scale-105'
                             }`}
                     >
                         <div className="flex flex-col items-center space-y-3">
