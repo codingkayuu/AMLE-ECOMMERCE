@@ -17,7 +17,6 @@ import Link from 'next/link'
 import { supabase } from '@/lib/supabase'
 import { useAuth } from '@/context/AuthContext'
 import Image from 'next/image'
-import { format } from 'date-fns'
 
 export default function SellerProductsPage() {
     const { user } = useAuth() as any

@@ -47,8 +47,9 @@ export default function DashboardSidebar() {
                         <Link
                             key={item.href}
                             href={item.href}
+                            prefetch={true}
                             className={`
-                flex items-center justify-between px-4 py-3.5 rounded-2xl transition-all duration-300 group
+                flex items-center justify-between px-4 py-3.5 rounded-2xl transition-all duration-200 group
                 ${isActive
                                     ? 'bg-green-600 text-white shadow-xl shadow-green-100 translate-x-1'
                                     : 'text-slate-500 hover:bg-slate-50 hover:text-slate-800'}

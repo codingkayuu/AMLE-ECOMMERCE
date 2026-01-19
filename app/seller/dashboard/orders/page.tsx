@@ -15,6 +15,7 @@ import {
 } from 'lucide-react'
 import { supabase } from '@/lib/supabase'
 import { useAuth } from '@/context/AuthContext'
+import Link from 'next/link'
 import { format } from 'date-fns'
 
 export default function SellerOrdersPage() {
@@ -22,6 +23,11 @@ export default function SellerOrdersPage() {
     const [orders, setOrders] = useState<any[]>([])
     const [loading, setLoading] = useState(true)
     const [activeTab, setActiveTab] = useState('all')
+    const [isMounted, setIsMounted] = useState(false)
+
+    useEffect(() => {
+        setIsMounted(true)
+    }, [])
 
     useEffect(() => {
         async function fetchOrders() {
@@ -158,7 +164,9 @@ export default function SellerOrdersPage() {
                                         <td className="px-8 py-6">
                                             <div className="flex items-center gap-2 text-slate-500">
                                                 <Calendar className="w-4 h-4" />
-                                                <span className="text-sm font-medium">{format(new Date(order.created_at), 'MMM dd, yyyy')}</span>
+                                                <span className="text-sm font-medium">
+                                                    {isMounted ? format(new Date(order.created_at), 'MMM dd, yyyy') : 'Loading date...'}
+                                                </span>
                                             </div>
                                         </td>
                                         <td className="px-8 py-6">
